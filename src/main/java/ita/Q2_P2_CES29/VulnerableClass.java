@@ -46,7 +46,11 @@ public class VulnerableClass {
 				while (br.read(buffer, 0, TAM_MAX_LINHA) != -1) { //só lê TAM_MAX_LINHA caracteres pra não estourar o readLine do BufferedReader
 					sCurrentLine = String.valueOf(buffer);
 					System.out.println(sCurrentLine);
+					buffer = new char[TAM_MAX_LINHA];
 				}
+				
+				fr.close();
+				br.close();
 			}
 			
 			else if (opr.equals("W")) { //verifica se digitou W
@@ -59,10 +63,11 @@ public class VulnerableClass {
 				   
 				if(linha.length() > TAM_MAX_LINHA) { //só permite que escreva TAM_MAX_LINHA caracteres pra não estourar o append do BufferedWriter
 				   	char[] buffer = linha.toCharArray();
-				   	linha = String.copyValueOf(buffer, 0, TAM_MAX_LINHA);
+				   	linha = String.valueOf(buffer, 0, TAM_MAX_LINHA);
 				}
 				    
 				buffWrite.append(linha + "\n");
+				buffWrite.close();
 				      
 			}
 			else { //se não digitou R nem W lança exceção
